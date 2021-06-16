@@ -23,7 +23,7 @@ torch.cuda.set_device(0)  # 选用GPU设备
 FolderPath = '../Dataset'
 TrainDataset, TrainDataLoader, ValDataset, ValDataLoader = PipeDatasetLoader(FolderPath, BatchSize, False)
 # %% Unet_BCELoss_Adam
-Unet = UNet(in_channels=3, out_channels=1, init_features=4, WithActivateLast=True, ActivateFunLast = torch.sigmoid).to('cuda')
+Unet = UNet(in_channels=3, out_channels=1, init_features=4, WithActivateLast=True, ActivateFunLast=torch.sigmoid).to('cuda')
 SaveFolder = 'Output'
 Criterion = nn.BCELoss().to('cuda')
 Optimizer = torch.optim.Adam(Unet.parameters(), lr=Lr)
@@ -54,7 +54,7 @@ for Epoch in range(1, Epochs + 1):
 			BatchLoss.backward()
 			Optimizer.step()
 			TrainLoss += BatchLoss.item()
-			print(OutputImg.shape)
+			# print(OutputImg.shape)
 	AveTrainLoss = TrainLoss / TrainDataset.__len__() * BatchSize  # 平均每幅图像的loss
 	print(", Total loss is: %.6f" % float(AveTrainLoss))
 	logging.warning('\tTrain\tEpoch:{0:04d}\tLearningRate:{1:08f}\tLoss:{2:08f}'.format(Epoch, LrScheduler.get_lr()[0], AveTrainLoss))

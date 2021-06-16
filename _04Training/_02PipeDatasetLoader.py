@@ -11,22 +11,31 @@ from PIL import Image
 import numpy as np
 import random
 
-InputImgSize=(128,128)
+InputImgSize = (128, 128)
 # %% 训练过程图片的变换
+# TrainImgTransform = transforms.Compose([
+# 	transforms.RandomAffine(degrees=(-10, 10), translate=(0.1, 0.1), scale=(0.5, 2.), shear=10),
+# 	transforms.RandomHorizontalFlip(),
+# 	# transforms.RandomVerticalFlip(),
+# 	transforms.RandomResizedCrop(InputImgSize, scale=(1., 1.), interpolation=Image.BILINEAR),
+# 	transforms.ToTensor(),
+# 	transforms.Normalize(mean=[0.46], std=[0.10]),
+# ])
+# TrainLabelTransform = transforms.Compose([
+# 	transforms.RandomAffine(degrees=(-10, 10), translate=(0.1, 0.1), scale=(0.5, 2.), shear=10),
+# 	transforms.RandomHorizontalFlip(),
+# 	# transforms.RandomVerticalFlip(),
+# 	transforms.RandomResizedCrop(InputImgSize, scale=(1., 1.), interpolation=Image.NEAREST),
+# 	# transforms.RandomResizedCrop(InputImgSize, scale=(1., 1.)),
+# 	transforms.ToTensor(),
+# ])
 TrainImgTransform = transforms.Compose([
-	transforms.RandomAffine(degrees=(-10, 10), translate=(0.1, 0.1), scale=(0.5, 2.), shear=10),
-	transforms.RandomHorizontalFlip(),
-	# transforms.RandomVerticalFlip(),
-	transforms.RandomResizedCrop(InputImgSize, scale=(1., 1.), interpolation=Image.BILINEAR),
+	transforms.Resize(InputImgSize),
 	transforms.ToTensor(),
 	transforms.Normalize(mean=[0.46], std=[0.10]),
 ])
 TrainLabelTransform = transforms.Compose([
-	transforms.RandomAffine(degrees=(-10, 10), translate=(0.1, 0.1), scale=(0.5, 2.), shear=10),
-	transforms.RandomHorizontalFlip(),
-	# transforms.RandomVerticalFlip(),
-	transforms.RandomResizedCrop(InputImgSize, scale=(1., 1.), interpolation=Image.NEAREST),
-	# transforms.RandomResizedCrop(InputImgSize, scale=(1., 1.)),
+	transforms.Resize(InputImgSize, interpolation=Image.NEAREST),
 	transforms.ToTensor(),
 ])
 
