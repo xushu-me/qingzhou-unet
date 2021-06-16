@@ -22,7 +22,7 @@ if __name__ == "__main__":
     # 将网络拷贝到deivce中
     net.to(device=device)
     # 加载模型参数
-    net.load_state_dict(torch.load('../_03Training/Output/0700_dict.pt', map_location='cuda'))
+    net.load_state_dict(torch.load('../_04Training/Output/0700_dict.pt', map_location='cuda'))
     # 测试模式
     net.eval()
     # 读取所有图片路径
@@ -35,14 +35,14 @@ if __name__ == "__main__":
         print(save_res_path)
         # 读取图片
         img = Image.open(test_path)
-        plt.imshow(img)
-        plt.show()
+        # plt.imshow(img)
+        # plt.show()
         # 处理图片
         img_tensor = ValImgTransform(img)
         # 转为tensor
         # img_tensor = torch.from_numpy(img)
-        # plt.imshow(np.array(img_tensor).transpose(1, 2, 0))
-        # plt.show()
+        plt.imshow(np.array(img_tensor).transpose(1, 2, 0))
+        plt.show()
         # 将tensor拷贝到device中，只用cpu就是拷贝到cpu中，用cuda就是拷贝到cuda中。
         img_tensor = img_tensor.to(device=device, dtype=torch.float32)
         img_tensor = img_tensor.reshape(1, 3, 128, 128)
