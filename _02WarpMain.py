@@ -10,19 +10,20 @@ import matplotlib.pyplot as plt
 np.set_printoptions(suppress=True, precision=4)
 
 ImgPaths = glob.glob("./OriImage/*.jpg")
-H = np.array([[  -0.61869793,   -2.24344654,  672.50410257],
-              [   0.00583877,    0.05218149, -226.93620917],
-              [  -0.00011433,   -0.00451613,    1.        ]])
+H = np.array([[  -0.31606066,   -1.9361168,   631.35385969],
+              [   0.01971609,    0.18515113, -173.82800143],
+              [   0.00012182,   -0.00378804,    1.0       ]])
 
 # 相机参数
-Dist = np.array([0.305256, 0.077563,0.003689, 0.000838, 0.00000], dtype=np.float32)
-K = np.array([[401.27, 0, 324.47],
-              [0, 541.61, 286.99],
+Dist = np.array([-0.285977053720519, 0.074339925936036, -0.008145684407220, 0.0, 0.0], dtype=np.float32)
+K = np.array([[308.7962753712953, 0, 325.1614349338094],
+              [0, 309.9281771981168, 278.8305865054944],
               [0, 0, 1]], dtype=np.float32)
 
 for ImgPath in ImgPaths:
 	print(ImgPath)
 	Img = cv2.imread(ImgPath)
+	Img = cv2.resize(Img, (640, 480))
 	UndistImg = cv2.undistort(Img, K, Dist)
 	WarpedImg = cv2.warpPerspective(UndistImg, H, (1000, 1000))
 	# plt.imshow(WarpedImg)
