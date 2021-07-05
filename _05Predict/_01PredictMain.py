@@ -64,4 +64,4 @@ if __name__ == "__main__":
         plt.imshow(pred)
         plt.show()
         # 保存图片
-        # cv2.imwrite(save_res_path, pred)
+        cv2.imwrite(save_res_path, pred)
