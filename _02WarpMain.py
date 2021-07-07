@@ -27,7 +27,7 @@ for ImgPath in ImgPaths:
 	UndistImg = cv2.undistort(Img, K, Dist)
 	WarpedImg = cv2.warpPerspective(UndistImg, H, (1000, 1000))
 	# plt.imshow(WarpedImg)
-	# 	# plt.show()
+	# plt.show()
 	SavePath = ImgPath.replace('OriImage', 'WarpedImg')
 	os.makedirs(os.path.dirname(SavePath), exist_ok=True)
 	cv2.imwrite(SavePath, WarpedImg)
